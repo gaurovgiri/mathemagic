@@ -1,14 +1,14 @@
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
-import 'package:runner/game/enemy.dart';
 import 'package:runner/game/game.dart';
+import 'package:runner/game/hoop.dart';
 
-enum WizardState { idle, move, attack, takeHit }
+enum WizardState { move, takeHit }
 
 class Wizard extends SpriteAnimationComponent
     with HasGameRef<RunnerGame>, CollisionCallbacks {
   Map<WizardState, SpriteAnimation> animationMap = {};
-  WizardState state = WizardState.idle;
+  WizardState state = WizardState.move;
   bool hasCollided = false;
   double speedY = 0.0;
   double gravity = 1000.0;
@@ -18,35 +18,20 @@ class Wizard extends SpriteAnimationComponent
   double ymax = 0;
 
   Wizard() {
-    size = Vector2(250, 300);
+    size = Vector2(150, 150);
   }
 
   @override
   Future<void> onLoad() async {
     animationMap = {
-      WizardState.idle: await SpriteAnimation.load(
-        'Player/Idle.png',
-        SpriteAnimationData.sequenced(
-          amount: 8,
-          textureSize: Vector2(150, 150),
-          stepTime: 0.1,
-        ),
-      ),
       WizardState.move: await SpriteAnimation.load(
         'Player/Move.png',
         SpriteAnimationData.sequenced(
-          amount: 8,
+          amount: 4,
           textureSize: Vector2(150, 150),
           stepTime: 0.1,
         ),
       ),
-      WizardState.attack: await SpriteAnimation.load(
-          'Player/Attack.png',
-          SpriteAnimationData.sequenced(
-            amount: 8,
-            stepTime: 0.1,
-            textureSize: Vector2(150, 150),
-          )),
       WizardState.takeHit: await SpriteAnimation.load(
           'Player/Take Hit.png',
           SpriteAnimationData.sequenced(
@@ -57,8 +42,8 @@ class Wizard extends SpriteAnimationComponent
     };
 
     animation = animationMap[WizardState.move];
-    position = Vector2(size.x / 50, size.y - 150);
-    ymax = size.y - 150;
+    position = Vector2(50, gameRef.size.y);
+    ymax = gameRef.size.y - 150;
 
     _timer = Timer(0.5, onTick: () {
       move();
@@ -79,16 +64,6 @@ class Wizard extends SpriteAnimationComponent
     animation = animationMap[state];
   }
 
-  void attack() {
-    state = WizardState.attack;
-    animation = animationMap[state];
-  }
-
-  void idle() {
-    state = WizardState.idle;
-    animation = animationMap[state];
-  }
-
   void takeHit() {
     state = WizardState.takeHit;
     animation = animationMap[state];
@@ -96,7 +71,7 @@ class Wizard extends SpriteAnimationComponent
 
   void jump() {
     speedY = -300;
-    idle();
+    move();
     _timer.start();
   }
 
@@ -105,7 +80,7 @@ class Wizard extends SpriteAnimationComponent
   }
 
   bool onSky() {
-    return position.y < -100;
+    return position.y < -25;
   }
 
   @override
@@ -114,10 +89,13 @@ class Wizard extends SpriteAnimationComponent
 
     speedY += gravity * dt;
     position.y += speedY * dt;
+
+    // Rotate up when going up, down when going down
+
     _timer.update(dt);
 
     if (onSky()) {
-      position.y = -100;
+      position.y = -25;
       speedY = 0.0;
     }
 
@@ -130,9 +108,9 @@ class Wizard extends SpriteAnimationComponent
   @override
   void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
     super.onCollision(intersectionPoints, other);
-    if ((other is Enemy) && !hasCollided) {
+    if ((other is Hoop) && !hasCollided) {
       hasCollided = true;
-      takeHit();
+      // takeHit();
       _timer.start();
     }
   }

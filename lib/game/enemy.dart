@@ -21,28 +21,21 @@ class Enemy extends SpriteAnimationComponent
 
   final EnemyType type;
   Enemy(this.type) {
-    size = Vector2(250, 275);
+    size = Vector2(96, 96);
   }
 
   @override
   Future<void> onLoad() async {
     animation = await SpriteAnimation.load(
-      '${type.name}/${actionMap[type]}.png',
+      'hoops/hoop.png',
       SpriteAnimationData.sequenced(
-        amount: type == EnemyType.Skeleton ? 4 : 8,
-        textureSize: Vector2(150, 150),
+        amount: 1,
+        textureSize: Vector2(32, 32),
         stepTime: 0.1,
       ),
     );
-    position = Vector2(
-        gameRef.size.x + size.x,
-        size.y +
-            40 -
-            (actionMap[type] == 'Flight'
-                ? Random().nextBool()
-                    ? 250
-                    : 150
-                : 150));
+    position =
+        Vector2(gameRef.size.x + size.x, gameRef.size.y - size.y - size.y / 2);
 
     await add(RectangleHitbox(
         position: Vector2(size.x / 2, size.y / 2),
