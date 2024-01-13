@@ -110,7 +110,6 @@ class Wizard extends SpriteAnimationComponent
     super.onCollision(intersectionPoints, other);
     if ((other is Hoop) && !hasCollided) {
       hasCollided = true;
-      // takeHit();
       _timer.start();
     }
   }

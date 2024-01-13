@@ -87,6 +87,7 @@ class Hoop extends SpriteAnimationComponent
         game.score += 1;
       } else {
         wrong();
+        other.takeHit();
       }
 
       gameRef.hoopManager.questionToDisplay.removeFromParent();
