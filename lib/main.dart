@@ -1,7 +1,9 @@
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:runner/game/game.dart';
-import 'package:runner/game/overlay.dart';
+import 'package:runner/overlay/hearts.dart';
+import 'package:runner/overlay/pause.dart';
+import 'package:runner/overlay/pause_button.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,6 +34,7 @@ class _RunnerHomeState extends State<RunnerHome> {
         body: GameWidget(game: RunnerGame(), overlayBuilderMap: {
       "Pause": pauseBuilder,
       "Hearts": heartsBuilder,
+      "PauseButton": pause_button
     }));
   }
 }

@@ -82,7 +82,7 @@ class Hoop extends SpriteAnimationComponent
     if (other is Wizard && !hasCollided) {
       hasCollided = true;
       if (value ==
-          gameRef.hoopManager.questionToDisplay.correctAnswer.toString()) {
+          gameRef.questionManager.questionToDisplay.correctAnswer.toString()) {
         correct();
         game.score += 1;
       } else {
@@ -90,14 +90,14 @@ class Hoop extends SpriteAnimationComponent
         other.takeHit();
       }
 
-      gameRef.hoopManager.questionToDisplay.removeFromParent();
+      gameRef.questionManager.questionToDisplay.removeFromParent();
 
-      for (final hoop in game.hoopManager.hoops) {
+      for (final hoop in game.questionManager.hoops) {
         if (hoop != this) {
           hoop.hasCollided = true;
         }
       }
-      for (final answer in game.hoopManager.answers) {
+      for (final answer in game.questionManager.answers) {
         answer.removeFromParent();
       }
     }

@@ -6,16 +6,14 @@ import 'package:flame/events.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
 import 'package:flame/parallax.dart';
-import 'package:runner/game/enemy_manager.dart';
-import 'package:runner/game/hoop_manager.dart';
+import 'package:runner/game/question_manager.dart';
 import 'package:runner/game/wizard.dart';
 
 class RunnerGame extends FlameGame with TapDetector, HasCollisionDetection {
   RunnerGame({super.camera});
 
   Wizard wizard = Wizard();
-  EnemyManager enemyManager = EnemyManager();
-  HoopManager hoopManager = HoopManager();
+  QuestionManager questionManager = QuestionManager();
   int score = 0;
   int level = 1;
   int thresholdLevel = 15;
@@ -51,9 +49,12 @@ class RunnerGame extends FlameGame with TapDetector, HasCollisionDetection {
         Vector2((size.x / 2) - (scoreText.width / 2), size.y - 30);
 
     world.add(wizard);
-    world.add(hoopManager);
+    world.add(questionManager);
     world.add(scoreText);
+
     overlays.add("Hearts");
+    overlays.add("PauseButton");
+
     return super.onLoad();
   }
 
