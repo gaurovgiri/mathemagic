@@ -1,6 +1,9 @@
 import 'package:flame/components.dart';
 import 'package:runner/game/game.dart';
 
+/// [Question] holds the questions that are available for the player to solve,
+/// answers associated with the question and the correct answer of each question.
+/// Displays the question on top of the screen.
 class Question extends TextComponent with HasGameRef<RunnerGame> {
   String question;
   List<String> answers;
@@ -31,7 +34,7 @@ List<Question> questions = [
   Question('18 + 11 = ?', ['25', '29', '39'], 29),
   Question('4 * 9 = ?', ['36', '40', '44'], 36),
   Question('20 - 14 = ?', ['4', '6', '7'], 6),
-  Question('11 * 2 = ?', ['18', '20', '24'], 22),
+  Question('11 * 2 = ?', ['18', '20', '22'], 22),
   Question('13 + 8 = ?', ['18', '24', '27'], 21),
   Question('9 * 7 = ?', ['56', '63', '77'], 63),
   Question('16 - 5 = ?', ['10', '12', '13'], 11),

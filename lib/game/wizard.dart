@@ -2,12 +2,15 @@ import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:runner/game/game.dart';
 import 'package:runner/game/hoop.dart';
-
+/// [WizardState] defines the states that the wizard can have
 enum WizardState { move, takeHit }
 
+/// [Wizard] displays the wizard sprite on screen, animates its state (move and 
+/// takeHit) and checks collision of the sprite with the obstacles i.e. hoops
 class Wizard extends SpriteAnimationComponent
     with HasGameRef<RunnerGame>, CollisionCallbacks {
   Map<WizardState, SpriteAnimation> animationMap = {};
+  /// sets the default wizard state to be moving
   WizardState state = WizardState.move;
   bool hasCollided = false;
   double speedY = 0.0;
@@ -20,8 +23,9 @@ class Wizard extends SpriteAnimationComponent
   Wizard() {
     size = Vector2(150, 150);
   }
-
-  @override
+  /// [onLoad] handles the animation of the sprite wizard on the screen for both
+  /// the states of move and takeHit
+  @override 
   Future<void> onLoad() async {
     animationMap = {
       WizardState.move: await SpriteAnimation.load(

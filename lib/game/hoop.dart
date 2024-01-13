@@ -9,7 +9,7 @@ import 'package:runner/main.dart';
 enum HoopState { idle, correct, wrong }
 
 enum HoopPosition { top, middle, bottom }
-
+/// [Hoop] maintains the position of the hoops in the game
 class Hoop extends SpriteAnimationComponent
     with HasGameRef<RunnerGame>, CollisionCallbacks {
   final HoopPosition _position;
@@ -23,6 +23,7 @@ class Hoop extends SpriteAnimationComponent
   }
 
   @override
+  /// [onLoad] defines the position of the hoops on the screen
   FutureOr<void> onLoad() async {
     positionMap = {
       HoopPosition.bottom: Vector2(
@@ -31,7 +32,7 @@ class Hoop extends SpriteAnimationComponent
           Vector2(gameRef.size.x + size.x, (gameRef.size.y - size.y) / 2),
       HoopPosition.top: Vector2(gameRef.size.x + size.x, size.y / 2),
     };
-
+    /// each hoop is animated on the screen
     animation = await SpriteAnimation.load(
       'hoops/hoop.png',
       SpriteAnimationData.sequenced(
@@ -79,6 +80,8 @@ class Hoop extends SpriteAnimationComponent
   }
 
   @override
+  /// [onCollision] handles the collison event in the game. If answer is correct
+  /// the game score is increased else lives are decreased.
   void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
     if (other is Wizard && !hasCollided) {
       hasCollided = true;

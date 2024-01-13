@@ -6,6 +6,8 @@ import 'package:runner/game/game.dart';
 import 'package:runner/game/hoop.dart';
 import 'package:runner/game/question.dart';
 
+/// [QuestionManager] manages the display of the question on the top of the 
+/// screen and the answers on each hoop 
 class QuestionManager extends Component
     with HasGameRef<RunnerGame>, CollisionCallbacks {
   final Timer _timer = Timer(5, repeat: true);
@@ -17,7 +19,7 @@ class QuestionManager extends Component
   QuestionManager() {
     _timer.onTick = _spawnHoop;
   }
-
+  /// [_spwanHoop] display the hoop and the answers associated with them.
   void _spawnHoop() {
     questionToDisplay = questions[_random.nextInt(questions.length)];
     gameRef.world.add(questionToDisplay);
