@@ -19,8 +19,10 @@ class RunnerGame extends FlameGame with TapDetector, HasCollisionDetection {
   int score = 0;
   int level = 1;
   int thresholdLevel = 15;
+
   final scoreText = TextComponent();
   late final ParallaxComponent parallax;
+  final questionText = TextComponent();
 
   @override
   FutureOr<void> onLoad() async {
@@ -43,12 +45,12 @@ class RunnerGame extends FlameGame with TapDetector, HasCollisionDetection {
     );
 
     camera.backdrop.add(parallax);
+
     scoreText.text = 'Score: $score | Level: $level';
-    scoreText.position = Vector2((size.x / 2) - (scoreText.width / 2), 0);
-    world.add(scoreText);
+    scoreText.position =
+        Vector2((size.x / 2) - (scoreText.width / 2), size.y - 30);
 
     world.add(wizard);
-    // world.add(enemyManager);
     world.add(hoopManager);
     world.add(scoreText);
     overlays.add("Hearts");

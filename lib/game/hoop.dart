@@ -15,8 +15,9 @@ class Hoop extends SpriteAnimationComponent
   late final Map<HoopPosition, Vector2> positionMap;
   bool hasCollided = false;
   bool isCorrect = true;
+  String value;
 
-  Hoop(this._position) {
+  Hoop(this._position, this.value) {
     size = Vector2(96, 96);
   }
 
@@ -80,16 +81,21 @@ class Hoop extends SpriteAnimationComponent
   void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
     if (other is Wizard && !hasCollided) {
       hasCollided = true;
-      game.score += 1;
-      correct();
+      if (value ==
+          gameRef.hoopManager.questionToDisplay.correctAnswer.toString()) {
+        correct();
+        game.score += 1;
+      } else {
+        wrong();
+      }
+
+      gameRef.hoopManager.questionToDisplay.removeFromParent();
 
       for (final hoop in game.hoopManager.hoops) {
         if (hoop != this) {
           hoop.hasCollided = true;
         }
       }
-      // if game.answer == answer -> correct()
-      // else -> wrong()
     }
     super.onCollision(intersectionPoints, other);
   }
