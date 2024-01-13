@@ -96,6 +96,9 @@ class Hoop extends SpriteAnimationComponent
           hoop.hasCollided = true;
         }
       }
+      for (final answer in game.hoopManager.answers) {
+        answer.removeFromParent();
+      }
     }
     super.onCollision(intersectionPoints, other);
   }

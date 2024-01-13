@@ -12,6 +12,7 @@ class HoopManager extends Component
   final Random _random = Random();
   List<Hoop> hoops = [];
   Question questionToDisplay = Question('', [], 0);
+  List<TextComponent> answers = [];
 
   HoopManager() {
     _timer.onTick = _spawnHoop;
@@ -25,8 +26,15 @@ class HoopManager extends Component
       Hoop(HoopPosition.middle, questionToDisplay.answers[1]),
       Hoop(HoopPosition.bottom, questionToDisplay.answers[2]),
     ];
+    answers = [
+      TextComponent()..text = questionToDisplay.answers[0],
+      TextComponent()..text = questionToDisplay.answers[1],
+      TextComponent()..text = questionToDisplay.answers[2],
+    ];
     for (final hoop in hoops) {
       gameRef.world.add(hoop);
+      answers[hoops.indexOf(hoop)].position = hoop.position;
+      gameRef.world.add(answers[hoops.indexOf(hoop)]);
     }
   }
 
@@ -40,5 +48,9 @@ class HoopManager extends Component
   void update(dt) {
     super.update(dt);
     _timer.update(dt);
+
+    for (final answer in answers) {
+      answer.position = hoops[answers.indexOf(answer)].position;
+    }
   }
 }
