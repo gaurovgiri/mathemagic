@@ -7,7 +7,7 @@ import 'package:runner/overlay/hearts.dart';
 import 'package:runner/overlay/pause.dart';
 import 'package:runner/overlay/pause_button.dart';
 
-ValueNotifier<int> lives = ValueNotifier(1);
+ValueNotifier<int> lives = ValueNotifier(5);
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(const Runner());
