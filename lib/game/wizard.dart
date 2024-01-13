@@ -61,7 +61,7 @@ class Wizard extends SpriteAnimationComponent
     ymax = size.y - 150;
 
     _timer = Timer(0.5, onTick: () {
-      attack();
+      move();
       hasCollided = false;
     });
 
@@ -95,15 +95,17 @@ class Wizard extends SpriteAnimationComponent
   }
 
   void jump() {
-    if (onGround()) {
-      speedY = -500;
-      idle();
-      _timer.start();
-    }
+    speedY = -300;
+    idle();
+    _timer.start();
   }
 
   bool onGround() {
     return position.y >= ymax;
+  }
+
+  bool onSky() {
+    return position.y < -100;
   }
 
   @override
@@ -113,6 +115,11 @@ class Wizard extends SpriteAnimationComponent
     speedY += gravity * dt;
     position.y += speedY * dt;
     _timer.update(dt);
+
+    if (onSky()) {
+      position.y = -100;
+      speedY = 0.0;
+    }
 
     if (onGround()) {
       position.y = ymax;
