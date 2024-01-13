@@ -2,6 +2,9 @@
 
 ## Introduction 
 Welcome to Mathemagic, an engaging and educational gaming experience that combines learning and problem-solving skills with immersive gameplay. This project is built using Flutter, a powerful UI toolkit, and leverages Flame, a 2D game engine for Flutter.
+![screenshot] (https://github.com/Hack-A-Week/The-Weekend-2024/blob/master/assets/images/GameScreenshot/gameScreenshot1.jpg)
+![screenshot] (https://github.com/Hack-A-Week/The-Weekend-2024/blob/master/assets/images/GameScreenshot/gameScreenshot2.jpg)
+![screenshot] (https://github.com/Hack-A-Week/The-Weekend-2024/blob/master/assets/images/GameScreenshot/gameScreenshot2-3.jpg)
 
 ## Getting Started 
 ### Prerequisites
