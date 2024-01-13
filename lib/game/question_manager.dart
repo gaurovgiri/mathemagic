@@ -53,4 +53,16 @@ class QuestionManager extends Component
       answer.position = hoops[answers.indexOf(answer)].position;
     }
   }
+
+  void resetQuestionManager() {
+    _timer.stop();
+    for (final hoop in hoops) {
+      hoop.removeFromParent();
+    }
+    for (final answer in answers) {
+      answer.removeFromParent();
+    }
+    questionToDisplay.removeFromParent();
+    _timer.start();
+  }
 }

@@ -4,6 +4,7 @@ import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:runner/game/game.dart';
 import 'package:runner/game/wizard.dart';
+import 'package:runner/main.dart';
 
 enum HoopState { idle, correct, wrong }
 
@@ -88,6 +89,7 @@ class Hoop extends SpriteAnimationComponent
       } else {
         wrong();
         other.takeHit();
+        lives.value -= 1;
       }
 
       gameRef.questionManager.questionToDisplay.removeFromParent();

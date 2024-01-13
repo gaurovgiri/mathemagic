@@ -1,7 +1,7 @@
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 
-OverlayWidgetBuilder pause_button = (context, game) {
+OverlayWidgetBuilder pauseButton = (context, game) {
   return Positioned(
       top: 15,
       left: 30,

@@ -105,6 +105,12 @@ class Wizard extends SpriteAnimationComponent
     }
   }
 
+  void resetWizard() {
+    // position = Vector2(50, gameRef.size.y);
+    speedY = 0.0;
+    move();
+  }
+
   @override
   void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
     super.onCollision(intersectionPoints, other);

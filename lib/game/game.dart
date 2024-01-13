@@ -6,8 +6,10 @@ import 'package:flame/events.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
 import 'package:flame/parallax.dart';
+
 import 'package:runner/game/question_manager.dart';
 import 'package:runner/game/wizard.dart';
+import 'package:runner/main.dart';
 
 class RunnerGame extends FlameGame with TapDetector, HasCollisionDetection {
   RunnerGame({super.camera});
@@ -68,6 +70,22 @@ class RunnerGame extends FlameGame with TapDetector, HasCollisionDetection {
   void update(double dt) {
     scoreText.text = 'Score: $score | Level: $level';
     level = (score ~/ 5) + 1;
+
+    if (lives.value <= 0) {
+      pauseEngine();
+      overlays.remove("PauseButton");
+      overlays.add("GameOver");
+      score = 0;
+      level = 1;
+    }
     super.update(dt);
+  }
+
+  void resetGame() {
+    lives.value = 5;
+
+    wizard.resetWizard();
+    questionManager.resetQuestionManager();
+    resumeEngine();
   }
 }
