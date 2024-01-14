@@ -28,6 +28,7 @@ class RunnerGame extends FlameGame with TapDetector, HasCollisionDetection {
 
   @override
   FutureOr<void> onLoad() async {
+    pauseWhenBackgrounded = true;
     // debugMode = true;
     ///sets fullscreen in landscape mode
     await Flame.device.fullScreen();

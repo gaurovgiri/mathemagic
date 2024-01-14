@@ -14,6 +14,7 @@ class Mathemagica extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        debugShowCheckedModeBanner: false,
         home: const MainMenu(),
         theme: ThemeData(fontFamily: 'Audiowide'),
         routes: {
