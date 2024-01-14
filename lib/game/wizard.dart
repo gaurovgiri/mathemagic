@@ -2,7 +2,6 @@ import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:runner/game/game.dart';
 import 'package:runner/game/hoop.dart';
-import 'package:runner/main.dart';
 
 /// [WizardState] defines the states that the wizard can have
 enum WizardState { move, takeHit }
