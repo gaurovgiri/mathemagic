@@ -54,7 +54,8 @@ class RunnerGame extends FlameGame with TapDetector, HasCollisionDetection {
     ///add parallax background
     camera.backdrop.add(parallax);
 
-    scoreText.text = 'Score: $score | Level: $level';
+    scoreText.text =
+        'Score: $score | Level: ${(level == thresholdLevel) ? "Infinite Bodmass" : level}';
     scoreText.position =
         Vector2((size.x / 2) - (scoreText.width / 2), size.y - 30);
     //add the respective component to the disply
@@ -81,8 +82,9 @@ class RunnerGame extends FlameGame with TapDetector, HasCollisionDetection {
 
   @override
   void update(double dt) {
-    scoreText.text = 'Score: $score | Level: $level';
-    level = (score ~/ 5) + 1;
+    scoreText.text =
+        'Score: $score | Level: ${(level == thresholdLevel) ? "Bodmass" : level}';
+    level = (level < thresholdLevel) ? (score ~/ 5) + 1 : thresholdLevel;
 
     if (lives.value <= 0) {
       pauseEngine();

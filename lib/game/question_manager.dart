@@ -11,7 +11,7 @@ import 'package:runner/game/question.dart';
 class QuestionManager extends Component
     with HasGameRef<RunnerGame>, CollisionCallbacks {
   final Timer _timer = Timer(5, repeat: true);
-  final Random _random = Random();
+  final Random _random = Random(123213123);
   List<Hoop> hoops = [];
   Question questionToDisplay = Question('', [], 0);
   List<TextComponent> answers = [];
