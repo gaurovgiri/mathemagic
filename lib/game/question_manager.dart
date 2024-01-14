@@ -22,8 +22,8 @@ class QuestionManager extends Component
 
   /// [_spawnHoop] display the hoop and the answers associated with them.
   void _spawnHoop() {
-    questionToDisplay =
-        questions[game.level - 1][_random.nextInt(questions.length)];
+    questionToDisplay = questions[game.level - 1]
+        [_random.nextInt(questions[game.level - 1].length)];
     gameRef.world.add(questionToDisplay);
     hoops = [
       Hoop(HoopPosition.top, questionToDisplay.answers[0]),
