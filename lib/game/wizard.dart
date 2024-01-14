@@ -73,6 +73,8 @@ class Wizard extends SpriteAnimationComponent
           size: size * 0.2,
           anchor: Anchor.center),
     );
+
+    gameRef.pauseEngine();
     super.onLoad();
   }
 

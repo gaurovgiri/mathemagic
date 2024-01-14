@@ -15,7 +15,7 @@ OverlayWidgetBuilder pauseBuilder = (BuildContext context, Game game) {
                 'PAUSED',
                 style: TextStyle(
                   color: Color(0xFF000000),
-                  fontSize: 39,
+                  fontSize: 34,
                 ),
               ),
               const SizedBox(

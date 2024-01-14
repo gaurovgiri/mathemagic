@@ -20,6 +20,7 @@ class RunnerGame extends FlameGame with TapDetector, HasCollisionDetection {
   int score = 0;
   int level = 1;
   int thresholdLevel = 4;
+  bool isPaused = true;
 
   final scoreText = TextComponent();
   late final ParallaxComponent parallax;
@@ -64,11 +65,15 @@ class RunnerGame extends FlameGame with TapDetector, HasCollisionDetection {
     overlays.add("PauseButton");
     //super constructor returns the instance of the parent class
     //returns every instance of the Runner Game class
-    return super.onLoad();
+    super.onLoad();
   }
 
   @override
   void onTapDown(TapDownInfo info) {
+    if (isPaused) {
+      resumeEngine();
+      isPaused = false;
+    }
     super.onTapDown(info);
     wizard.jump();
   }
