@@ -2,6 +2,7 @@ import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:runner/game/game.dart';
 
+/// [gameOver] display the gameover menu where the player can restart a new game
 OverlayWidgetBuilder gameOver = (BuildContext context, Game game) {
   return Center(
     child: Container(
@@ -21,6 +22,8 @@ OverlayWidgetBuilder gameOver = (BuildContext context, Game game) {
               const SizedBox(
                 height: 20,
               ),
+              /// pauseButton is added and a new game is started by resuming 
+              /// game engine
               IconButton(
                   onPressed: () {
                     game.overlays.remove("GameOver");
