@@ -19,7 +19,7 @@ class Question extends TextComponent with HasGameRef<RunnerGame> {
   }
 }
 
-List <List<Question>> questions = [
+List<List<Question>> questions = [
   [
     Question('2 + 3 = ?', ['5', '7', '10'], 5),
     Question('5 + 1 + 8 = ?', ['13', '14', '12'], 14),

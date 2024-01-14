@@ -2,30 +2,43 @@ import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:runner/game/game.dart';
 import 'package:runner/game/hoop.dart';
+import 'package:runner/main.dart';
+
 /// [WizardState] defines the states that the wizard can have
 enum WizardState { move, takeHit }
 
-/// [Wizard] displays the wizard sprite on screen, animates its state (move and 
+/// [Wizard] displays the wizard sprite on screen, animates its state (move and
 /// takeHit) and checks collision of the sprite with the obstacles i.e. hoops
 class Wizard extends SpriteAnimationComponent
     with HasGameRef<RunnerGame>, CollisionCallbacks {
   Map<WizardState, SpriteAnimation> animationMap = {};
+
   /// sets the default wizard state to be moving
   WizardState state = WizardState.move;
-  bool hasCollided = false;
-  double speedY = 0.0;
+  double speedY = -20;
   double gravity = 1000.0;
-
-  Timer _timer = Timer(1);
-
   double ymax = 0;
+
+  Vector2 playerPosition = Vector2.zero();
+
+  Timer timer = Timer(1);
+
+  bool hasCollided = false;
 
   Wizard() {
     size = Vector2(150, 150);
   }
+
+  @override
+  void onMount() {
+    playerPosition = Vector2(50, gameRef.size.y - 500);
+    position = playerPosition;
+    super.onMount();
+  }
+
   /// [onLoad] handles the animation of the sprite wizard on the screen for both
   /// the states of move and takeHit
-  @override 
+  @override
   Future<void> onLoad() async {
     animationMap = {
       WizardState.move: await SpriteAnimation.load(
@@ -46,10 +59,10 @@ class Wizard extends SpriteAnimationComponent
     };
 
     animation = animationMap[WizardState.move];
-    position = Vector2(50, gameRef.size.y);
+    // position = Vector2(50, gameRef.size.y);
     ymax = gameRef.size.y - 150;
 
-    _timer = Timer(0.5, onTick: () {
+    timer = Timer(0.5, onTick: () {
       move();
       hasCollided = false;
     });
@@ -76,7 +89,7 @@ class Wizard extends SpriteAnimationComponent
   void jump() {
     speedY = -300;
     move();
-    _timer.start();
+    timer.start();
   }
 
   bool onGround() {
@@ -96,7 +109,7 @@ class Wizard extends SpriteAnimationComponent
 
     // Rotate up when going up, down when going down
 
-    _timer.update(dt);
+    timer.update(dt);
 
     if (onSky()) {
       position.y = -25;
@@ -110,8 +123,8 @@ class Wizard extends SpriteAnimationComponent
   }
 
   void resetWizard() {
-    // position = Vector2(50, gameRef.size.y);
-    speedY = 0.0;
+    // position = Vector2(50, 20);
+    speedY = -300;
     move();
   }
 
@@ -120,7 +133,7 @@ class Wizard extends SpriteAnimationComponent
     super.onCollision(intersectionPoints, other);
     if ((other is Hoop) && !hasCollided) {
       hasCollided = true;
-      _timer.start();
+      timer.start();
     }
   }
 }
