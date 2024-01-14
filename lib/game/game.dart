@@ -19,7 +19,7 @@ class RunnerGame extends FlameGame with TapDetector, HasCollisionDetection {
   QuestionManager questionManager = QuestionManager();
   int score = 0;
   int level = 1;
-  int thresholdLevel = 15;
+  int thresholdLevel = 4;
 
   final scoreText = TextComponent();
   late final ParallaxComponent parallax;
