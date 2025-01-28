@@ -1,37 +1,24 @@
-import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
-import 'package:runner/game/game.dart';
-import 'package:runner/game/overlay.dart';
+import 'package:runner/screen/gameplay.dart';
+import 'package:runner/screen/main_menu.dart';
 
+ValueNotifier<int> lives = ValueNotifier(5);
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const Runner());
+  runApp(const Mathemagica());
 }
 
-class Runner extends StatelessWidget {
-  const Runner({super.key});
+class Mathemagica extends StatelessWidget {
+  const Mathemagica({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(home: RunnerHome());
-  }
-}
-
-// Just for running the our game widget instance
-class RunnerHome extends StatefulWidget {
-  const RunnerHome({super.key});
-
-  @override
-  State<RunnerHome> createState() => _RunnerHomeState();
-}
-
-class _RunnerHomeState extends State<RunnerHome> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        body: GameWidget(game: RunnerGame(), overlayBuilderMap: {
-      "Pause": pauseBuilder,
-      "Hearts": heartsBuilder,
-    }));
+    return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: const MainMenu(),
+        theme: ThemeData(fontFamily: 'Audiowide'),
+        routes: {
+          '/game': (context) => const MathemagicaGame(),
+        });
   }
 }
